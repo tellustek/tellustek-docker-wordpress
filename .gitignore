@@ -8,6 +8,9 @@ lib/*.js
 node_modules
 workspace
 
+# MAC
+.DS_Store
+
 # CDK asset staging directory
 .cdk.staging
 cdk.out
