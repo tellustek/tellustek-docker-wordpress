@@ -1,7 +1,12 @@
-*.js
-!jest.config.js
+bin/*.js
+lib/*.js
 *.d.ts
+!jest.config.js
+.env
+*.zip
+*.jpa
 node_modules
+workspace
 
 # CDK asset staging directory
 .cdk.staging
