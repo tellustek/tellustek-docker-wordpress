@@ -14,7 +14,8 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
 * `cdk synth`       emits the synthesized CloudFormation template
 
 ## 事前準備
-請先安裝好 docker 與 nodejs, 如果要執行佈建會需要先安裝 aws-cli
+- 請先安裝好 docker 與 nodejs, 如果要執行佈建會需要先安裝 aws-cli
+- `cp env.example .env` 並且修改 .env 中的內容
 
 ## 如何進行本地開發
 .env檔案可以設定本地開發時打算使用的hostname與port, 執行以下命令開始執行 Server
