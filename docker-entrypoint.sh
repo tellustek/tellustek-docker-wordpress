@@ -96,4 +96,8 @@ if [[ "$1" == apache2* ]] || [ "$1" = 'php-fpm' ]; then
 	fi
 fi
 
+ln -nfs /usr/src/plugins/* /var/www/html/wp-content/plugins/
+ln -nfs /usr/src/themes/* /var/www/html/wp-content/themes/
+touch /var/www/html/test.php
+
 exec "$@"

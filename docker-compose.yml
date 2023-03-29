@@ -17,6 +17,8 @@ services:
         define('WP_SITEURL','${DEV_HOST}');
     volumes:
       - ./workspace/wordpress:/var/www/html
+      - ./src/plugins:/usr/src/plugins
+      - ./src/themes:/usr/src/themes
 
   db:
     image: mysql:8
