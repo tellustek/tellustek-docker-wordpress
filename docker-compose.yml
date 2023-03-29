@@ -17,7 +17,7 @@ services:
         define('WP_HOME','${DEV_HOST}');
         define('WP_SITEURL','${DEV_HOST}');
     volumes:
-      - wordpress:/var/www/html
+      - ./workspace/wordpress:/var/www/html
 
   db:
     image: mysql:8
@@ -30,8 +30,8 @@ services:
       MYSQL_PASSWORD: pass
       MYSQL_RANDOM_ROOT_PASSWORD: '1'
     volumes:
-      - db:/var/lib/mysql
+      - ./workspace/db:/var/lib/mysql
 
-volumes:
-  wordpress:
-  db:
+# volumes:
+#   wordpress:
+#   db:
