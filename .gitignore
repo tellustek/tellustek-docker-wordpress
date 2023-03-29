@@ -9,7 +9,7 @@ node_modules
 workspace
 
 # MAC
-.DS_Store
+**/.DS_Store
 
 # CDK asset staging directory
 .cdk.staging
