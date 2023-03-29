@@ -98,5 +98,7 @@ fi
 
 ln -nfs /usr/src/plugins/* /var/www/html/wp-content/plugins/
 ln -nfs /usr/src/themes/* /var/www/html/wp-content/themes/
+echo >&2 "初始化完成"
+
 
 exec "$@"
