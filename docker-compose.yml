@@ -7,24 +7,26 @@ services:
     restart: always
     ports:
       - ${DEV_PORT}:80
-    env_file:
-      - dev.env
     environment:
-      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: user
+      WORDPRESS_DB_PASSWORD: pass
+      WORDPRESS_DB_NAME: db
       WORDPRESS_CONFIG_EXTRA: |
         define('WP_HOME','${DEV_HOST}');
         define('WP_SITEURL','${DEV_HOST}');
     volumes:
       - ./workspace/wordpress:/var/www/html
 
-  mysql:
+  db:
     image: mysql:8
     restart: always
     logging:
       driver: none
-    env_file:
-      - dev.env
     environment:
+      MYSQL_DATABASE: db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
       MYSQL_RANDOM_ROOT_PASSWORD: '1'
     volumes:
       - ./workspace/db:/var/lib/mysql
