@@ -11,7 +11,8 @@
     "cdk": "cdk",
     "prebuild-image": "docker compose down",
     "build-image": "docker compose build",
-    "start": "docker compose up",
+    "start": "docker compose up -d",
+    "logs": "docker compose logs wordpress -f",
     "stop": "docker compose down",
     "backup": "docker compose exec backup backup",
     "restore": "docker compose exec backup restore"
