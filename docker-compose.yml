@@ -3,7 +3,7 @@ version: '3.4'
 services:
 
   wordpress:
-    build: .
+    build: ./src/wordpress
     restart: always
     ports:
       - ${DEV_WEB_PORT:-1337}:80
@@ -17,8 +17,8 @@ services:
         define('WP_SITEURL','${DEV_HOST:-http://localhost}:${DEV_WEB_PORT:-1337}');
     volumes:
       - wp:/var/www/html
-      - ./src/plugins:/usr/src/plugins
-      - ./src/themes:/usr/src/themes
+      - ./src/wordpress/plugins:/usr/src/plugins
+      - ./src/wordpress/themes:/usr/src/themes
 
   mysql:
     image: mysql:8
@@ -40,7 +40,7 @@ services:
     restart: always
     volumes:
       - wp:/var/www/html
-      - ./backups:/backups
+      - ./src/backups:/backups
     depends_on:
      - mysql
     environment:

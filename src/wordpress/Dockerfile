@@ -1,13 +1,13 @@
-FROM wordpress:latest
+FROM wordpress:6.2
 
 
 # Copying Themes and Plugins into the wordpress image
 # COPY ["./src/themes", "/usr/src/wordpress/wp-content/themes"]
 # COPY ["./src/plugins","/usr/src/wordpress/wp-content/plugins"]
-COPY ["./src/restore","/usr/src/restore"]
+# COPY ["./src/restore","/usr/src/restore"]
 
 # Applying the execution right on the folders for apache
-COPY ./src/config/uploads.ini $PHP_INI_DIR/conf.d/uploads.ini
+COPY ./config/uploads.ini $PHP_INI_DIR/conf.d/uploads.ini
 
 RUN set -eux; \
   if [ -n "$(find /usr/src/restore -maxdepth 1 -type f \( -name '*.zip' -o -name '*.jpa' \))" ]; then \
