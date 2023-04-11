@@ -20,6 +20,6 @@ src/wordpress/plugins/akismet
 cdk.out
 
 # backup and restore data
-./src/backups
+src/backups
 *.zip
 *.jpa
