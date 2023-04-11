@@ -6,35 +6,49 @@ services:
     build: .
     restart: always
     ports:
-      - ${DEV_WEB_PORT}:80
+      - ${DEV_WEB_PORT:-1337}:80
     environment:
-      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_HOST: mysql
       WORDPRESS_DB_USER: user
       WORDPRESS_DB_PASSWORD: pass
       WORDPRESS_DB_NAME: db
       WORDPRESS_CONFIG_EXTRA: |
-        define('WP_HOME','${DEV_HOST}');
-        define('WP_SITEURL','${DEV_HOST}');
+        define('WP_HOME','${DEV_HOST:-http://localhost}:${DEV_WEB_PORT:-1337}');
+        define('WP_SITEURL','${DEV_HOST:-http://localhost}:${DEV_WEB_PORT:-1337}');
     volumes:
-      - ./workspace/wordpress:/var/www/html
+      - wp:/var/www/html
       - ./src/plugins:/usr/src/plugins
       - ./src/themes:/usr/src/themes
 
-  db:
+  mysql:
     image: mysql:8
     restart: always
     logging:
       driver: none
     ports:
-      - ${DEV_MYSQL_PORT}:3306
+      - ${DEV_MYSQL_PORT:-3306}:3306
     environment:
       MYSQL_DATABASE: db
       MYSQL_USER: user
       MYSQL_PASSWORD: pass
       MYSQL_RANDOM_ROOT_PASSWORD: '1'
     volumes:
-      - ./workspace/db:/var/lib/mysql
+      - mysql:/var/lib/mysql
 
-# volumes:
-#   wordpress:
-#   db:
+  backup:
+    image: aveltens/wordpress-backup
+    restart: always
+    volumes:
+      - wp:/var/www/html
+      - ./backups:/backups
+    depends_on:
+     - mysql
+    environment:
+      MYSQL_ENV_MYSQL_DATABASE: db
+      MYSQL_ENV_MYSQL_USER: user
+      MYSQL_ENV_MYSQL_PASSWORD: pass
+      MYSQL_PORT_3306_TCP_PORT: 3306
+
+volumes:
+  wp:
+  mysql:
