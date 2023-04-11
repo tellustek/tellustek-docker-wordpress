@@ -9,10 +9,9 @@
     "watch": "tsc -w",
     "test": "jest",
     "cdk": "cdk",
-    "restore": "docker compose cp ./src/restore wordpress:/usr/src && docker compose run wordpress sh -c 'cp -r /usr/src/restore/* /var/www/html'",
-    "postrestore": "docker compose run wordpress sh -c 'chown -R www-data:www-data /var/www/html'",
-    "cleanup": "docker compose down -v --rmi all",
-    "rebuildimage": "npm run cleanup && docker compose build",
+    "restore": "docker compose cp ./src/wordpress/restore/. wordpress:/usr/src/restore",
+    "prerebuild": "docker compose down",
+    "rebuild": "docker compose build",
     "start": "docker compose up",
     "stop": "docker compose down"
   },
