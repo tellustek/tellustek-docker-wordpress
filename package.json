@@ -9,11 +9,12 @@
     "watch": "tsc -w",
     "test": "jest",
     "cdk": "cdk",
-    "restore": "docker compose cp ./src/wordpress/restore/. wordpress:/usr/src/restore",
-    "prerebuild": "docker compose down",
-    "rebuild": "docker compose build",
+    "prebuild-image": "docker compose down",
+    "build-image": "docker compose build",
     "start": "docker compose up",
-    "stop": "docker compose down"
+    "stop": "docker compose down",
+    "backup": "docker compose exec backup backup",
+    "restore": "docker compose exec backup restore"
   },
   "devDependencies": {
     "@types/jest": "^29.4.0",
