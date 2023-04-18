@@ -5,8 +5,7 @@ lib/*.js
 .env
 node_modules
 
-# Default WP components ＆ themes
-src/wordpress/themes/twentytwentythree
+# Default WP components ＆ old themes
 src/wordpress/themes/twentytwentytwo
 src/wordpress/themes/twentytwentyone
 src/wordpress/plugins/akismet
@@ -23,3 +22,7 @@ cdk.out
 src/backups
 *.zip
 *.jpa
+
+# log files
+log
+*.log
