@@ -1,24 +1,27 @@
-version: '3.4'
+version: '3.8'
 
 services:
 
   wordpress:
     build: ./src/wordpress
     restart: always
-    ports:
-      - ${DEV_WEB_PORT:-1337}:80
+    depends_on:
+     - mysql
     environment:
       WORDPRESS_DB_HOST: mysql
       WORDPRESS_DB_USER: user
       WORDPRESS_DB_PASSWORD: pass
       WORDPRESS_DB_NAME: db
+      WORDPRESS_DEBUG: 1
       WORDPRESS_CONFIG_EXTRA: |
-        define('WP_HOME','${DEV_HOST:-http://localhost}:${DEV_WEB_PORT:-1337}');
-        define('WP_SITEURL','${DEV_HOST:-http://localhost}:${DEV_WEB_PORT:-1337}');
+        # define('WP_HOME','${DEV_HOST:-http://127.0.0.1}:${DEV_WEB_PORT:-1337}');
+        # define('WP_SITEURL','${DEV_HOST:-http://127.0.0.1}:${DEV_WEB_PORT:-1337}');
+    ports:
+      - 1337:80
     volumes:
       - wp:/var/www/html
-      - ./src/wordpress/plugins:/usr/src/plugins
-      - ./src/wordpress/themes:/usr/src/themes
+      - ./src/wordpress/plugins:/var/www/html/wp-content/plugins
+      - ./src/wordpress/themes:/var/www/html/wp-content/themes
 
   mysql:
     image: mysql:8
@@ -43,6 +46,7 @@ services:
       - ./src/backups:/backups
     depends_on:
      - mysql
+     - wordpress
     environment:
       MYSQL_ENV_MYSQL_DATABASE: db
       MYSQL_ENV_MYSQL_USER: user
