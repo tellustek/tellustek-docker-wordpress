@@ -9,6 +9,7 @@ node_modules
 src/wordpress/themes/twentytwentytwo
 src/wordpress/themes/twentytwentyone
 src/wordpress/plugins/akismet
+src/wordpress/plugins/hello.php
 
 # MAC
 .DS_Store
