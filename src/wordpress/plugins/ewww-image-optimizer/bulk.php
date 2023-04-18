@@ -6,7 +6,6 @@
  * @link https://ewww.io
  * @package EWWW_Image_Optimizer
  */
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
