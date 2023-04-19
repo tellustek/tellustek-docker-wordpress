@@ -4,6 +4,7 @@
   "bin": {
     "new_wp": "bin/new_wp.js"
   },
+  "type": "module",
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
@@ -12,9 +13,8 @@
     "prebuild-image": "docker compose down",
     "build-image": "docker compose build",
     "start": "docker compose up -d && node ./src/index.js",
-    "poststart": "docker compose down",
-    "logs": "docker compose logs wordpress -f",
     "stop": "docker compose down",
+    "logs": "docker compose logs wordpress -f",
     "backup": "docker compose exec backup backup",
     "restore": "docker compose exec backup restore"
   },
@@ -24,6 +24,7 @@
     "aws-cdk": "2.69.0",
     "browser-sync": "^2.29.1",
     "browser-sync-webpack-plugin": "^2.3.0",
+    "got": "^12.6.0",
     "jest": "^29.5.0",
     "ts-jest": "^29.0.5",
     "ts-node": "^10.9.1",
