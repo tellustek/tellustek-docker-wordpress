@@ -104,7 +104,7 @@ export class NewWpStack extends cdk.Stack {
 
 
     const certificate = new acm.Certificate(this, 'Cert', {
-      domainName: '*.chronocats.com',
+      domainName: 'domain.example',
       validation: acm.CertificateValidation.fromDns()
     })
     const httpsListener = lb.addListener('HttpsListener', {
