@@ -20,7 +20,7 @@ src/wordpress/plugins/hello.php
 cdk.out
 
 # backup and restore data
-src/backups
+backups
 *.zip
 *.jpa
 
