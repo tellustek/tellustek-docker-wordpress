@@ -1,42 +1,42 @@
 # Welcome
 歡迎使用 Tellustek 建製的 Wordpress with Docker 開發佈建包
-
+<br><br>
 
 ## 事前準備
-- 請先安裝好 docker 與 nodejs, 如果要執行佈建會需要先安裝 aws-cli
-- `cp env.example .env` 並且修改 .env 中的內容
-
+- [docker](https://www.docker.com/products/docker-desktop/)
+- [nodejs](https://nodejs.org/zh-tw/download) - 請使用 16 或是 18 等 LTS 版本
+- (optional) deployment 會使用 [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html#getting_started_install)
+<br><br>
 ## 如何進行本地開發
-.env檔案可以設定本地開發時打算使用的hostname與port, 執行以下命令開始執行 Server
-```
-docker compose up
-```
+可以使用 .env 對開發中環境進行一些設定, env.example 檔案有設定內容範例可以參考.
+`npm start`
 第一次執行會需要下載各種相依的容器, 會比較花時間
+<br><br>
+
+## 如何備份
+`npm run backup` 執行後會跟據系統日期在 `backups` 資料夾中建立以日期為命名規則的靜態文件打包檔與 sql 備份檔.
+<br><br>
 
 ## 如何還原
-如果尚未進行過 docker compose up, 可使用以下操作:<br>
-將akeeba備份的zip或是jpa備份檔, 放入 src/restore 目錄中, 執行 docker compose up時就會自動複製並且在網站根目錄產生 restore.php 檔按提供還原使用.
+`npm run restore yyyyMMDD` 可以還原指定日期的打包檔
+<br><br>
 
-已經執行過 docker compose up 有以下兩種選擇
-* Option 1. 清除所有既有資料重新 build 新的 image<br>
-  `npm run rebuildimage`<br>
-  完成後再次執行<br>
-  `docker compose up`
-* Option 2. Copy備份資料進入容器內<br>
-  `npm run restore`
+## 如何使用 akeeba 備份檔進行還原
+`npm run akeeba-restore` 可以還原指定日期的打包檔
+<br><br>
 
 ## 常見問題
-* 如何執行容器<br>`docker compose up`
-* 如何停止容器執行<br>`ctrl+c`
-* 如何將本地開發中資料刪除乾淨<br>`npm run cleanup`
+* 重複的專案名稱 - 因為會用資料夾名成來建立 docker image 和 valume, 請盡量用不同的專案名稱或是刪除時手動將docker image與 volume一併刪除
+<br><br>
 
 ## 關於佈建
-佈建是設計給使 AWS 全家餐與 AWS CDK 使用, `cdk.json` 記錄了 AWS CDK 工具會如何進行佈建
+...
+<br><br>
 
 ## Useful commands
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `cdk deploy`      deploy this stack to your default AWS account/region
-* `cdk diff`        compare deployed stack with current state
-* `cdk synth`       emits the synthesized CloudFormation template
+- `npm start` 啟動服務
+- `npm stop` 關閉服務
+- `npm run logs` 查看 web server logs
+- `npm run backup` 備份
+- `npm run restore yyyyMMDD` 還原
+- `npm run akeeba-restore` 使用 akeeba 備份檔還原
